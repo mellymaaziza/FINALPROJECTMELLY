@@ -1,0 +1,53 @@
+# Environment Variables
+.env
+.env.local
+.env.*.local
+
+# Virtual Environments
+venv/
+env/
+ENV/
+my_env/
+my_env_old/
+.venv/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+*.sublime-project
+*.sublime-workspace
+
+# Streamlit
+.streamlit/cache/
+.streamlit/config.toml
+
+# Project specific
+old_files/
+temp/
+.ipynb_checkpoints
