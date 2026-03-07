@@ -199,7 +199,6 @@ def get_theme_css(dark_mode=False):
             font-size: 14px !important;
             font-family: inherit !important;
             transition: all 0.2s ease !important;
-            width: 100% !important;
             box-sizing: border-box !important;
         }
         
@@ -210,36 +209,38 @@ def get_theme_css(dark_mode=False):
             outline: none !important;
         }
         
-        /* Selectbox Container - FULL WIDTH */
-        .stSelectbox {
-            width: 100% !important;
-        }
-        
-        .stSelectbox > div {
-            width: 100% !important;
-        }
-        
-        .stSelectbox > div > div {
-            width: 100% !important;
-            border-color: #2a3050 !important;
+        /* FIX STREAMLIT SELECTBOX LAYOUT */
+        .stSelectbox div[data-baseweb="select"]{
             background-color: #1a1f3a !important;
+            border: 1px solid #2a3050 !important;
             border-radius: 8px !important;
-            box-sizing: border-box !important;
+            min-height: 42px !important;
         }
         
-        .stSelectbox > div > div > div {
-            color: #e0e0e0 !important;
-            width: 100% !important;
+        /* text */
+        .stSelectbox div[data-baseweb="select"] span{
+            color: #ffffff !important;
         }
         
-        .stSelectbox > div > div:focus-within {
+        /* remove extra width forcing */
+        .stSelectbox > div{
+            width: auto !important;
+        }
+        
+        /* value container */
+        .stSelectbox div[data-baseweb="value-container"]{
+            padding-left: 10px !important;
+        }
+        
+        /* Focus state */
+        .stSelectbox div[data-baseweb="select"]:focus-within {
             border-color: #4da3ff !important;
             box-shadow: 0 0 12px rgba(77, 163, 255, 0.25) !important;
         }
         
-        /* Multiselect Container - FULL WIDTH */
+        /* Multiselect Container */
         .stMultiSelect {
-            width: 100% !important;
+            width: auto !important;
         }
         
         .stMultiSelect > div {
@@ -1836,25 +1837,25 @@ elif page == "Prediction":
         
         with col1:
             st.markdown("<label style='color: #ffffff; font-weight: 700; display: block; margin-bottom: 8px; font-size: 13px;'>Gender</label>", unsafe_allow_html=True)
-            gender = st.selectbox("Gender", ["Male", "Female", "Other"], label_visibility="collapsed", key="gender_input")
+            gender = st.selectbox("Gender", ["Male", "Female", "Other"], label_visibility="collapsed", key="gender_input", help="Select gender")
         
         with col2:
             st.markdown("<label style='color: #ffffff; font-weight: 700; display: block; margin-bottom: 8px; font-size: 13px;'>Education Level</label>", unsafe_allow_html=True)
             education = st.selectbox("Education Level",
                 ["High School", "Graduate", "Masters", "Phd"],
-                label_visibility="collapsed", key="education_input")
+                label_visibility="collapsed", key="education_input", help="Select education level")
         
         with col3:
             st.markdown("<label style='color: #ffffff; font-weight: 700; display: block; margin-bottom: 8px; font-size: 13px;'>Major Discipline</label>", unsafe_allow_html=True)
             major = st.selectbox("Major Discipline",
                 ["STEM", "Business Degree", "Arts", "Humanities", "No Major"],
-                label_visibility="collapsed", key="major_input")
+                label_visibility="collapsed", key="major_input", help="Select major discipline")
         
         with col4:
             st.markdown("<label style='color: #ffffff; font-weight: 700; display: block; margin-bottom: 8px; font-size: 13px;'>Years of Experience</label>", unsafe_allow_html=True)
             experience = st.selectbox("Years of Experience", 
                 ["<1", "1-3", "4-6", "7-10", "11-15", "16-20", ">20"],
-                label_visibility="collapsed", key="experience_input")
+                label_visibility="collapsed", key="experience_input", help="Select experience range")
         
         st.markdown("<div style='padding: 10px 0;'></div>", unsafe_allow_html=True)
         
@@ -1868,19 +1869,19 @@ elif page == "Prediction":
             st.markdown("<label style='color: #ffffff; font-weight: 700; display: block; margin-bottom: 8px; font-size: 13px;'>Relevant Experience</label>", unsafe_allow_html=True)
             rel_exp = st.selectbox("Relevant Experience",
                 ["Has relevent experience", "No relevent experience"],
-                label_visibility="collapsed", key="rel_exp_input")
+                label_visibility="collapsed", key="rel_exp_input", help="Select experience relevance")
         
         with col7:
             st.markdown("<label style='color: #ffffff; font-weight: 700; display: block; margin-bottom: 8px; font-size: 13px;'>Company Size</label>", unsafe_allow_html=True)
             company_size = st.selectbox("Company Size",
                 ["<10", "10-49", "50-99", "100-500", "500-999", "1000-4999", "5000-9999", "10000+"],
-                label_visibility="collapsed", key="company_size_input")
+                label_visibility="collapsed", key="company_size_input", help="Select company size")
         
         with col8:
             st.markdown("<label style='color: #ffffff; font-weight: 700; display: block; margin-bottom: 8px; font-size: 13px;'>Company Type</label>", unsafe_allow_html=True)
             company_type = st.selectbox("Company Type",
                 ["Pvt Ltd", "Public Sector", "Funded Startup", "Early Stage Startup", "Other", "NGO"],
-                label_visibility="collapsed", key="company_type_input")
+                label_visibility="collapsed", key="company_type_input", help="Select company type")
         
         st.markdown("---")
         
@@ -1897,13 +1898,13 @@ elif page == "Prediction":
             st.markdown("<label style='color: #ffffff; font-weight: 700; display: block; margin-bottom: 8px; font-size: 13px;'>Years Since Last Job Change</label>", unsafe_allow_html=True)
             last_job = st.selectbox("Years Since Last Job Change",
                 ["never", "<1", "1", "2", "3", "4", ">4"],
-                label_visibility="collapsed", key="last_job_input")
+                label_visibility="collapsed", key="last_job_input", help="Select years")
         
         with col11:
             st.markdown("<label style='color: #ffffff; font-weight: 700; display: block; margin-bottom: 8px; font-size: 13px;'>Enrollment Status</label>", unsafe_allow_html=True)
             enrollment = st.selectbox("Enrollment Status",
                 ["no_enrollment", "Part time course", "Full time course"],
-                label_visibility="collapsed", key="enrollment_input")
+                label_visibility="collapsed", key="enrollment_input", help="Select enrollment status")
         
         with col12:
             st.markdown("<label style='color: #ffffff; font-weight: 700; display: block; margin-bottom: 8px; font-size: 13px;'> </label>", unsafe_allow_html=True)
@@ -2262,12 +2263,8 @@ elif page == "Insights":
 # PAGE 6: ABOUT ME
 # ============================================================================
 elif page == "About Me":
-    st.markdown("""
-        <h1>👋 Tentang Saya</h1>
-        <p style='color: #b0b0b0; font-size: 16px; margin: 0 0 30px 0;'>
-            Data Analyst & Data Scientist | R&D Department
-        </p>
-    """, unsafe_allow_html=True)
+    st.markdown("<h1 style='color: #e0e0e0;'>👋 Tentang Saya</h1>", unsafe_allow_html=True)
+    st.markdown("<p style='color: #b0b0b0; font-size: 16px;'>Data Analyst & Data Scientist | R&D Department</p>", unsafe_allow_html=True)
     
     st.markdown("---")
     
@@ -2301,172 +2298,14 @@ elif page == "About Me":
         skill_col1, skill_col2 = st.columns(2, gap="medium")
         
         with skill_col1:
-            st.markdown("""
-            <div style='
-                background: linear-gradient(135deg, #1a3a52 0%, #0f1f38 100%);
-                border: 1px solid #2a5a7a;
-                border-left: 4px solid #4da3ff;
-                padding: 16px;
-                border-radius: 10px;
-                margin-bottom: 12px;
-            '>
-                <p style='color: #4da3ff; font-weight: 700; margin: 0 0 10px 0; font-size: 14px;'>📊 Data Analysis</p>
-                <p style='color: #b0b0b0; font-size: 13px; margin: 0; line-height: 1.5;'>Python • SQL • Excel • Power BI • Tableau • Pandas • NumPy</p>
-            </div>
+            st.markdown("""<div style="background: linear-gradient(135deg, #1a3a52 0%, #0f1f38 100%); border: 1px solid #2a5a7a; border-left: 4px solid #4da3ff; padding: 16px; border-radius: 10px; margin-bottom: 12px;"><p style="color: #4da3ff; font-weight: 700; margin: 0 0 10px 0; font-size: 14px;">📊 Data Analysis</p><p style="color: #b0b0b0; font-size: 13px; margin: 0; line-height: 1.5;">Python • SQL • Excel • Power BI • Tableau</p></div>""", unsafe_allow_html=True)
             
-            <div style='
-                background: linear-gradient(135deg, #2a2a52 0%, #1a1a38 100%);
-                border: 1px solid #3a2a7a;
-                border-left: 4px solid #8a5cff;
-                padding: 16px;
-                border-radius: 10px;
-                margin-bottom: 12px;
-            '>
-                <p style='color: #8a5cff; font-weight: 700; margin: 0 0 10px 0; font-size: 14px;'>🤖 Data Science</p>
-                <p style='color: #b0b0b0; font-size: 13px; margin: 0; line-height: 1.5;'>Machine Learning • Predictive Modeling • Statistical Analysis • Scikit-learn</p>
-            </div>
-            """, unsafe_allow_html=True)
+            st.markdown("""<div style="background: linear-gradient(135deg, #2a2a52 0%, #1a1a38 100%); border: 1px solid #3a2a7a; border-left: 4px solid #8a5cff; padding: 16px; border-radius: 10px; margin-bottom: 12px;"><p style="color: #8a5cff; font-weight: 700; margin: 0 0 10px 0; font-size: 14px;">🤖 Data Science</p><p style="color: #b0b0b0; font-size: 13px; margin: 0; line-height: 1.5;">Machine Learning • Predictive Modeling • Scikit-learn</p></div>""", unsafe_allow_html=True)
         
         with skill_col2:
-            st.markdown("""
-            <div style='
-                background: linear-gradient(135deg, #1a4a4f 0%, #0a2a3f 100%);
-                border: 1px solid #2a5a6f;
-                border-left: 4px solid #00c2a8;
-                padding: 16px;
-                border-radius: 10px;
-                margin-bottom: 12px;
-            '>
-                <p style='color: #00c2a8; font-weight: 700; margin: 0 0 10px 0; font-size: 14px;'>🎨 UI/UX Design</p>
-                <p style='color: #b0b0b0; font-size: 13px; margin: 0; line-height: 1.5;'>Figma • Canva • Website Prototyping • User Research</p>
-            </div>
+            st.markdown("""<div style="background: linear-gradient(135deg, #1a4a4f 0%, #0a2a3f 100%); border: 1px solid #2a5a6f; border-left: 4px solid #00c2a8; padding: 16px; border-radius: 10px; margin-bottom: 12px;"><p style="color: #00c2a8; font-weight: 700; margin: 0 0 10px 0; font-size: 14px;">🎨 UI/UX Design</p><p style="color: #b0b0b0; font-size: 13px; margin: 0; line-height: 1.5;">Figma • Canva • Website Prototyping</p></div>""", unsafe_allow_html=True)
             
-            <div style='
-                background: linear-gradient(135deg, #3a2a52 0%, #1a1a38 100%);
-                border: 1px solid #3d2a7a;
-                border-left: 4px solid #ff5fa2;
-                padding: 16px;
-                border-radius: 10px;
-                margin-bottom: 12px;
-            '>
-                <p style='color: #ff5fa2; font-weight: 700; margin: 0 0 10px 0; font-size: 14px;'>📈 Market Research</p>
-                <p style='color: #b0b0b0; font-size: 13px; margin: 0; line-height: 1.5;'>Consumer Insights • Trend Analysis • Competitive Intelligence</p>
-            </div>
-            """, unsafe_allow_html=True)
-    
-    with col_profile:
-        # Profile Card
-        st.markdown("""
-        <div style='
-            background: linear-gradient(135deg, #151933 0%, #0f1429 100%);
-            border: 1px solid #2a3050;
-            border-radius: 12px;
-            padding: 25px;
-            text-align: center;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
-        '>
-            <div style='
-                width: 120px;
-                height: 120px;
-                margin: 0 auto 20px;
-                background: linear-gradient(135deg, #4da3ff 0%, #8a5cff 100%);
-                border-radius: 50%;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                font-size: 50px;
-            '>👩‍💼</div>
-            
-            <h3 style='color: #e0e0e0; margin: 0 0 5px 0; font-size: 18px;'>Melly Marcellia Aziza</h3>
-            <p style='color: #4da3ff; margin: 0 0 15px 0; font-weight: 600; font-size: 13px;'>DATA ANALYST & DATA SCIENTIST</p>
-            
-            <p style='color: #b0b0b0; font-size: 12px; line-height: 1.6; margin: 0 0 20px 0;'>
-                Industrial Engineering Graduate | R&D Department | Jakarta, Indonesia
-            </p>
-            
-            <div style='
-                background: rgba(77, 163, 255, 0.1);
-                border-left: 2px solid #4da3ff;
-                padding: 12px;
-                border-radius: 8px;
-                margin-bottom: 15px;
-            '>
-                <p style='color: #4da3ff; font-weight: 600; font-size: 12px; margin: 0;'>CORE COMPETENCIES</p>
-                <p style='color: #b0b0b0; font-size: 11px; margin: 8px 0 0 0;'>
-                    Data Analysis • MLOps • Business Intelligence • Product Innovation
-                </p>
-            </div>
-        </div>
-        """, unsafe_allow_html=True)
-    
-    st.markdown("---")
-    
-    # Contact Section
-    st.markdown("### 📬 Hubungi Saya")
-    
-    contact_col1, contact_col2 = st.columns(2, gap="large")
-    
-    with contact_col1:
-        st.markdown("""
-        <div style='display: flex; flex-direction: column; gap: 12px;'>
-            <div style='
-                background: linear-gradient(135deg, #1a3a52 0%, #0f1f38 100%);
-                border: 1px solid #2a5a7a;
-                border-left: 4px solid #4da3ff;
-                padding: 12px;
-                border-radius: 10px;
-            '>
-                <p style='color: #4da3ff; font-weight: 700; margin: 0 0 6px 0; font-size: 13px;'>📧 Email</p>
-                <a href='mailto:mellymarceliaaziza@gmail.com' style='color: #b0b0b0; text-decoration: none; font-size: 13px;'>
-                    <span style='color: #b0b0b0;'>mellymarceliaaziza@gmail.com</span>
-                </a>
-            </div>
-            
-            <div style='
-                background: linear-gradient(135deg, #2a2a52 0%, #1a1a38 100%);
-                border: 1px solid #3a2a7a;
-                border-left: 4px solid #8a5cff;
-                padding: 12px;
-                border-radius: 10px;
-            '>
-                <p style='color: #8a5cff; font-weight: 700; margin: 0 0 6px 0; font-size: 13px;'>💼 LinkedIn</p>
-                <a href='https://www.linkedin.com/in/mellymarceliaaziza/' target='_blank' style='color: #b0b0b0; text-decoration: none; font-size: 13px;'>
-                    <span style='color: #b0b0b0;'>linkedin.com/in/mellymarceliaaziza</span>
-                </a>
-            </div>
-        </div>
-        """, unsafe_allow_html=True)
-    
-    with contact_col2:
-        st.markdown("""
-        <div style='display: flex; flex-direction: column; gap: 12px;'>
-            <div style='
-                background: linear-gradient(135deg, #1a4a4f 0%, #0a2a3f 100%);
-                border: 1px solid #2a5a6f;
-                border-left: 4px solid #00c2a8;
-                padding: 12px;
-                border-radius: 10px;
-            '>
-                <p style='color: #00c2a8; font-weight: 700; margin: 0 0 6px 0; font-size: 13px;'>💻 GitHub</p>
-                <a href='https://github.com/mellymaaziza' target='_blank' style='color: #b0b0b0; text-decoration: none; font-size: 13px;'>
-                    <span style='color: #b0b0b0;'>github.com/mellymaaziza</span>
-                </a>
-            </div>
-            
-            <div style='
-                background: linear-gradient(135deg, #3a2a52 0%, #1a1a38 100%);
-                border: 1px solid #3d2a7a;
-                border-left: 4px solid #ff5fa2;
-                padding: 12px;
-                border-radius: 10px;
-            '>
-                <p style='color: #ff5fa2; font-weight: 700; margin: 0 0 6px 0; font-size: 13px;'>🌐 Portfolio</p>
-                <a href='#' target='_blank' style='color: #b0b0b0; text-decoration: none; font-size: 13px;'>
-                    <span style='color: #b0b0b0;'>Portfolio / Website</span>
-                </a>
-            </div>
-        </div>
-        """, unsafe_allow_html=True)
+            st.markdown("""<div style="background: linear-gradient(135deg, #3a2a52 0%, #1a1a38 100%); border: 1px solid #3d2a7a; border-left: 4px solid #ff5fa2; padding: 16px; border-radius: 10px; margin-bottom: 12px;"><p style="color: #ff5fa2; font-weight: 700; margin: 0 0 10px 0; font-size: 14px;">📈 Market Research</p><p style="color: #b0b0b0; font-size: 13px; margin: 0; line-height: 1.5;">Consumer Insights • Trend Analysis</p></div>""", unsafe_allow_html=True)
 
 # ============================================================================
 # FOOTER
